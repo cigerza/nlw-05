@@ -49,13 +49,13 @@ class ConnectionsService {
       .execute();
   }
 
-  // async deleteBySocketID(socket_id: string) {
-  //   await this.connectionsRepository
-  //     .createQueryBuilder()
-  //     .delete()
-  //     .where("socket_id = :socket_id", { socket_id, })
-  //     .execute();
-  // }  
+  async deleteBySocketID(socket_id: string) {
+    await this.connectionsRepository
+      .createQueryBuilder()
+      .delete()
+      .where("socket_id = :socket_id", { socket_id, })
+      .execute();
+  }
 }
 
 export { ConnectionsService };
