@@ -2,6 +2,7 @@ import { io } from "../http";
 import { ConnectionsService } from "../services/ConnectionsService";
 import { UsersService } from "../services/UsersService";
 import { MessagesService } from "../services/MessagesService";
+import { Connection } from "../entities/Connection";
 
 interface IParams {
   text: string;
@@ -56,6 +57,8 @@ io.on("connect", (socket) => {
     const { text, socket_admin_id } = params;
     const socket_id = socket.id;
     const { user_id } = await connectionsService.findBySocketID(socket_id);
+    //     const connection = await connectionsService.findBySocketID(socket_id);
+    //     const user_id = (connection as Connection).user_id;
 
     const message = await messagesService.create({
       text,
@@ -68,8 +71,9 @@ io.on("connect", (socket) => {
     });
   });
 
-  socket.on("disconnect", async () => {
-    console.log(socket.id);
-    await connectionsService.deleteBySocketID(socket.id);
-  });
+  //   socket.on("disconnect", async () => {
+  //     console.log(socket.id);
+  //     await connectionsService.deleteBySocketID(socket.id);
+
+  //   });
 });

@@ -1,6 +1,7 @@
 import { io } from "../http";
 import { ConnectionsService } from "../services/ConnectionsService";
 import { MessagesService } from "../services/MessagesService";
+import { Connection } from "../entities/Connection";
 
 io.on("connect", async (socket) => {
   const connectionsService = new ConnectionsService();
@@ -26,6 +27,9 @@ io.on("connect", async (socket) => {
     });
 
     const { socket_id } = await connectionsService.findByUserId(user_id);
+    // const connection = await connectionsService.findByUserId(user_id);
+    // const socket_id = (connection as Connection).socket_id;
+
 
     io.to(socket_id).emit("admin_send_to_client", {
       text,
